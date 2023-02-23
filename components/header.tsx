@@ -1,8 +1,13 @@
+import { useSession, signIn, signOut } from "next-auth/react";
+
 interface LayoutProps {
   title?: string;
 }
 
 export default function Header({ title }: LayoutProps) {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+
   return (
     <header className="container flex items-center justify-between h-16 px-4 mx-auto rounded dark:bg-gray-900">
       <a rel="noopener noreferrer" href="#" aria-label="Homepage">
@@ -29,9 +34,29 @@ export default function Header({ title }: LayoutProps) {
             Link
           </a>
         </div>
-        <button className="px-4 py-2 rounded-md dark:bg-violet-400 dark:text-gray-900">
-          Sign up
-        </button>
+
+        {!session && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+            className="px-4 py-2 rounded-md dark:bg-violet-400 dark:text-gray-900"
+          >
+            Sign in
+          </button>
+        )}
+        {session?.user && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+            className="px-4 py-2 rounded-md dark:bg-violet-400 dark:text-gray-900"
+          >
+            Sign out
+          </button>
+        )}
       </div>
       <button className="flex items-center justify-center p-2 lg:hidden">
         <svg
