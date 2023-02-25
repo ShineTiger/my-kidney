@@ -2,6 +2,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   title?: string;
@@ -12,6 +13,8 @@ export default function Header({ title }: LayoutProps) {
 
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+
+  const router = useRouter();
 
   //마운팅 이후 모드전환 가능케 하도록 초기화 시킴
   useEffect(() => setMounted(true), []);
@@ -67,9 +70,8 @@ export default function Header({ title }: LayoutProps) {
 
         {!session && (
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
+            onClick={() => {
+              router.push("/login");
             }}
             className="px-4 py-2 rounded-md text-gray-50 bg-violet-600 dark:bg-violet-400 dark:text-gray-900"
           >
