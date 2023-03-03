@@ -1,4 +1,6 @@
 import Layout from "@/components/layout";
+import useMutation from "@/lib/client/useMutation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface formType {
@@ -9,15 +11,33 @@ interface formType {
 
 export default function signup() {
   const {
+    handleSubmit,
     register,
     formState: { errors },
   } = useForm<formType>({ mode: "onChange" });
   const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
+  const [submitting, setSubmitting] = useState(false);
+  const onValid = (data: formType) => {
+    setSubmitting(true);
+    fetch("/api/users/enter", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      setSubmitting(false);
+    });
+  };
+
   return (
     <Layout>
       <section className="p-6 bg-gray-100 text-gray-900">
-        <form className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
+        <form
+          onSubmit={handleSubmit(onValid)}
+          className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
+        >
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
             <div className="space-y-2 col-span-full lg:col-span-1">
               <p className="font-medium">회원 가입</p>
@@ -86,7 +106,9 @@ export default function signup() {
             </div>
           </fieldset>
 
-          <button>완료</button>
+          <button type="submit">
+            {submitting ? "Loading" : "Get one-time password"}
+          </button>
         </form>
       </section>
     </Layout>
