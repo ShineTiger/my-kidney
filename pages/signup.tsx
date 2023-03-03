@@ -18,27 +18,20 @@ export default function signup() {
   const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
   const [submitting, setSubmitting] = useState(false);
-  const onValid = (data: formType) => {
-    setSubmitting(true);
-    fetch("/api/users/enter", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
-      setSubmitting(false);
-    });
+  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
+  const onValid = (validForm: formType) => {
+    enter(validForm);
   };
+  console.log();
 
   return (
     <Layout>
-      <section className="p-6 bg-gray-100 text-gray-900">
+      <section className="p-6 bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50">
         <form
           onSubmit={handleSubmit(onValid)}
-          className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
+          className="container flex flex-col mx-auto space-y-10 ng-untouched ng-pristine ng-valid"
         >
-          <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
+          <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50 dark:bg-gray-900">
             <div className="space-y-2 col-span-full lg:col-span-1">
               <p className="font-medium">회원 가입</p>
               <p className="text-xs">가입에 필요한 정보를 적어주세요</p>
@@ -106,7 +99,10 @@ export default function signup() {
             </div>
           </fieldset>
 
-          <button type="submit">
+          <button
+            type="submit"
+            className="bg-violet-600 w-full px-8 py-3 font-semibold rounded-md  text-gray-50"
+          >
             {submitting ? "Loading" : "Get one-time password"}
           </button>
         </form>
