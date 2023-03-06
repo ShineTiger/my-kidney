@@ -2,27 +2,31 @@ import Layout from "@/components/layout";
 import useMutation from "@/lib/client/useMutation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import NextAuth from "next-auth";
 
-interface formType {
+interface signupFormType {
   email: string;
   username: string;
   password: string;
+  pwConfirm: string;
 }
 
 export default function signup() {
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
-  } = useForm<formType>({ mode: "onChange" });
+  } = useForm<signupFormType>({ mode: "onChange" });
   const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+  const pwRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
 
   const [submitting, setSubmitting] = useState(false);
   const [enter, { loading, data, error }] = useMutation("/api/users/enter");
-  const onValid = (validForm: formType) => {
+  const onValid = (validForm: signupFormType) => {
     enter(validForm);
   };
-  console.log();
 
   return (
     <Layout>
@@ -56,9 +60,7 @@ export default function signup() {
                 />
                 <label className="label">
                   <span className="label-text-alt text-red-600">
-                    {errors.email &&
-                      errors.email.message &&
-                      errors.email.message}
+                    {errors.email?.message}
                   </span>
                 </label>
               </div>
@@ -79,22 +81,52 @@ export default function signup() {
                   Password
                 </label>
                 <input
+                  {...register("password", {
+                    required: "비밀번호를 입력해주세요",
+                    minLength: {
+                      value: 8,
+                      message: "최소 8자 이상 입력해 주세요",
+                    },
+                    pattern: {
+                      value: pwRegex,
+                      message:
+                        "비밀번호는 8자 이내의 영문, 숫자 및 특수 문자만 이용할 수 있습니다",
+                    },
+                  })}
                   id="password"
                   type="password"
                   placeholder="비밀번호를 입력해주세요 "
                   className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-600 border-gray-300 text-gray-900"
                 />
+                <label className="label">
+                  <span className="label-text-alt text-red-600">
+                    {errors.password?.message}
+                  </span>
+                </label>
               </div>
               <div className="col-span-full sm:col-span-3">
                 <label htmlFor="website" className="text-sm">
                   Password Confirm
                 </label>
                 <input
+                  {...register("pwConfirm", {
+                    required: true,
+                    validate: (val: string) => {
+                      if (watch("password") != val) {
+                        return "비밀번호가 일치하지 않습니다";
+                      }
+                    },
+                  })}
                   id="passwordConfirm"
                   type="password"
-                  placeholder="비밀번호를 다시한번 입력해주세요 "
+                  placeholder="비밀번호를 다시 한번 입력해주세요 "
                   className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-600 border-gray-300 text-gray-900"
                 />
+                <label className="label">
+                  <span className="label-text-alt text-red-600">
+                    {errors.pwConfirm?.message}
+                  </span>
+                </label>
               </div>
             </div>
           </fieldset>
