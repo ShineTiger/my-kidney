@@ -10,6 +10,10 @@ export const authOptions = {
       clientSecret: "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",
     }),
   ],
+  userinfo: {
+    url: "https://my-zone-eight.vercel.app/api/auth/userinfo",
+    params: { some: "param" },
+  },
 };
 
 export default NextAuth(authOptions);
