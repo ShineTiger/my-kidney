@@ -4,13 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import NextAuth from "next-auth";
 
-interface signupFormType {
-  email: string;
-  username: string;
-  password: string;
-  pwConfirm: string;
-}
-
 export default function signup() {
   const {
     handleSubmit,
