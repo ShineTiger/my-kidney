@@ -1,5 +1,5 @@
 import Layout from "@/components/layout";
-import useMutation from "@/lib/client/useMutation";
+import useMutation from "@/libs/client/useMutation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import NextAuth from "next-auth";
