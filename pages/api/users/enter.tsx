@@ -1,5 +1,5 @@
-import client from "@/lib/client/client";
-import withHandler from "@/lib/client/server/withHandler";
+import client from "@/libs/server/client";
+import withHandler from "@/libs/server/withHandler";
 import { NextApiRequest, NextApiResponse } from "next/types";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
