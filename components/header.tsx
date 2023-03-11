@@ -57,9 +57,7 @@ export default function Header({ title }: LayoutProps) {
           </span>
         </label>
         <div className="space-x-4">
-          <a rel="noopener noreferrer" href="#">
-            Link
-          </a>
+          <Link href={"/mypage"}>mypage</Link>
           <a rel="noopener noreferrer" href="#">
             Link
           </a>
