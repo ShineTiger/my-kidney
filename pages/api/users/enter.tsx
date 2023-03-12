@@ -18,6 +18,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     },
     update: {},
   });
+  //user를 upsert하고 token을 생성한 다음에 upsert 했던 user와 연결한다
   const token = await client.token.create({
     data: { payload: payload, user: { connect: { id: user.id } } },
   });
