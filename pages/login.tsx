@@ -20,13 +20,17 @@ export default function login() {
   };
 
   const handleGoogleLogin = async () => {
-    const result = await signIn("google", { callbackUrl: "/" });
-    if (result?.error) {
-      console.error(result.error);
-    } else {
-      await axios.post("/api/users/googleEnter", {
-        email: session?.user?.email,
-      });
+    try {
+      const result = await signIn("google", { callbackUrl: "/" });
+      if (result?.error) {
+        console.error(result.error);
+      } else {
+        await axios.post("/api/users/googleEnter", {
+          email: session?.user?.email,
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
