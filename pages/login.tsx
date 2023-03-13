@@ -1,11 +1,13 @@
 import Layout from "@/components/layout";
-import { useSession, signIn, signOut } from "next-auth/react";
+import axios from "axios";
+import { useSession, signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function login() {
   const [validation, setValidation] = useState(false);
   const [email, setEmail] = useState("");
   const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+  const { data: session } = useSession();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -14,6 +16,17 @@ export default function login() {
   const isAvaliable = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "email") {
       emailRegex.test(email) ? setValidation(true) : setValidation(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const result = await signIn("google", { callbackUrl: "/" });
+    if (result?.error) {
+      console.error(result.error);
+    } else {
+      await axios.post("/api/users/googleEnter", {
+        email: session?.user?.email,
+      });
     }
   };
 
@@ -26,7 +39,7 @@ export default function login() {
         <p className="text-sm text-center text-gray-600">Dont have account?</p>
         <div className="my-6 space-y-4">
           <button
-            onClick={() => signIn()}
+            onClick={handleGoogleLogin}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-600 focus:ring-violet-600"

@@ -62,6 +62,13 @@ export default function signup() {
                   Name
                 </label>
                 <input
+                  {...register("name", {
+                    required: "이름을 입력해주세요",
+                    maxLength: {
+                      value: 10,
+                      message: "10자 이내로 입력해 주세요",
+                    },
+                  })}
                   id="name"
                   type="text"
                   placeholder="10자 이내로 이름을 적어주세요"
