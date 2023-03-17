@@ -1,13 +1,11 @@
 import Layout from "@/components/layout";
-import axios from "axios";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 export default function login() {
   const [validation, setValidation] = useState(false);
   const [email, setEmail] = useState("");
   const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-  const { data: session } = useSession();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -20,18 +18,7 @@ export default function login() {
   };
 
   const handleGoogleLogin = async () => {
-    try {
-      const result = await signIn("google", { callbackUrl: "/" });
-      if (result?.error) {
-        console.error(result.error);
-      } else {
-        await axios.post("/api/users/googleEnter", {
-          email: session?.user?.email,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    await signIn("google");
   };
 
   return (
