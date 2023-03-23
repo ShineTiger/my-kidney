@@ -1,4 +1,5 @@
 import Layout from "@/components/layout";
+import useMutation from "@/libs/client/useMutation";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,22 +10,16 @@ interface postType {
 }
 
 const upload: NextPage = () => {
+  const [submit, { loading, data, error }] = useMutation("/api/posts/submit");
   const {
     handleSubmit,
     register,
     watch,
     formState: { errors },
   } = useForm<postType>({ mode: "onChange" });
-  const [submitting, setSubmitting] = useState(false);
   const onValid = (validForm: postType) => {
-    setSubmitting(true);
-    fetch("/api/posts/submit", {
-      method: "POST",
-      body: JSON.stringify(validForm),
-      headers: { "Content-Type": "application/json" },
-    }).then(() => {
-      setSubmitting(false);
-    });
+    if (loading) return;
+    submit(validForm);
   };
   return (
     <Layout>
@@ -74,7 +69,7 @@ const upload: NextPage = () => {
               className="shadow bg-violet-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="submit"
             >
-              발행
+              {loading ? "발행 중" : "발행하기"}
             </button>
           </div>
           <div className="md:w-2/3"></div>
