@@ -1,5 +1,6 @@
 import Layout from "@/components/layout";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function login() {
@@ -24,10 +25,10 @@ export default function login() {
   return (
     <Layout>
       <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 bg-gray-50 text-gray-800 my-0 mx-auto">
-        <h2 className="mb-3 text-3xl font-semibold text-center">
-          Login to your account
-        </h2>
-        <p className="text-sm text-center text-gray-600">Dont have account?</p>
+        <h2 className="mb-3 text-3xl font-semibold text-center">로그인</h2>
+        <p className="text-sm text-center text-gray-600 underline	">
+          <Link href="/signup">계정이 없다면 회원가입을 진행해 주세요 </Link>
+        </p>
         <div className="my-6 space-y-4">
           <button
             onClick={handleGoogleLogin}
