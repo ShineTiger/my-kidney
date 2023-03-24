@@ -1,8 +1,9 @@
 import Layout from "@/components/layout";
 import useMutation from "@/libs/client/useMutation";
+import { Post } from "@prisma/client";
 import { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import router from "next/router";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface postType {
@@ -10,8 +11,13 @@ interface postType {
   content: string;
 }
 
+interface UploadPostMutation {
+  post: Post;
+}
+
 const upload: NextPage = () => {
-  const [submit, { loading, data, error }] = useMutation("/api/posts/submit");
+  const [submit, { loading, data }] =
+    useMutation<UploadPostMutation>("/api/posts/submit");
   const {
     handleSubmit,
     register,
@@ -21,6 +27,12 @@ const upload: NextPage = () => {
     if (loading) return;
     submit(validForm);
   };
+
+  useEffect(() => {
+    if (data) {
+      router.replace(`/posts/${data.post.id}`);
+    }
+  });
 
   return (
     <Layout>
