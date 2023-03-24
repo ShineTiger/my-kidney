@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import useMutation from "@/libs/client/useMutation";
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -14,13 +15,13 @@ const upload: NextPage = () => {
   const {
     handleSubmit,
     register,
-    watch,
     formState: { errors },
   } = useForm<postType>({ mode: "onChange" });
   const onValid = (validForm: postType) => {
     if (loading) return;
     submit(validForm);
   };
+
   return (
     <Layout>
       <form
