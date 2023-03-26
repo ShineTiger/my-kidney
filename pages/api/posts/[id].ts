@@ -19,7 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           },
         },
       });
-      res.json(post);
+      res.json({ post: post, user: post?.user });
     }
 
     const session = await getServerSession(req, res, authOptions);
