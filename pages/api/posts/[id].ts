@@ -21,4 +21,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default withHandler("GET", handler);
+export default withHandler(["GET"], handler);

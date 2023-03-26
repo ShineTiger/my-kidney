@@ -1,3 +1,4 @@
+import Layout from "@/components/layout";
 import { Post } from "@prisma/client";
 import { useRouter } from "next/router";
 import React from "react";
@@ -16,9 +17,9 @@ function PostDetail() {
     return <div>Loading..</div>;
   }
   return (
-    <div>
+    <Layout>
       <p>{data.title}</p>
-    </div>
+    </Layout>
   );
 }
 
