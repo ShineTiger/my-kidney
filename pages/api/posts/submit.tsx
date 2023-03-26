@@ -22,7 +22,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const post = await prisma.post.create({
           data: { title, content, user: { connect: { id: existingUser.id } } },
         });
-        res.status(200).json(post);
+        res.status(200).json({ post: post });
       } else {
         res.status(404).json({ message: "유저를 찾을 수 없습니다" });
       }

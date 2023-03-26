@@ -30,9 +30,10 @@ const upload: NextPage = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data.post.id);
       router.replace(`/posts/${data.post.id}`);
     }
-  });
+  }, [data, router]);
 
   return (
     <Layout>
