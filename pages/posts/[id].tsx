@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-
 interface GetPostType {
   post:
     | (Post & {
@@ -51,11 +50,11 @@ function PostDetail() {
   if (!data) {
     return <div>Loading..</div>;
   }
-
   return (
     <Layout>
       <p>{data.post?.title}</p>
-      {isPostAuthor && (
+      <p>{data.post?.content}</p>
+      {session && data.post?.user.name === session?.user?.name && (
         <div>
           <button onClick={deletePost}>[삭제]</button>
         </div>
