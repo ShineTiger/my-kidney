@@ -19,7 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           },
         },
       });
-      res.json(post);
+      return res.json({ post });
     }
 
     const session = await getServerSession(req, res, authOptions);
@@ -31,6 +31,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       // if(req.method === "POST"){
       //   const alreadyExists = Boolean(await prisma.user.findUnique({where:email}))
       // }
+    } else {
+      return res.status(400).json({ error: "유효하나 세션이 없습니다" });
     }
   }
 }
