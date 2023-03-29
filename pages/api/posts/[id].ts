@@ -6,6 +6,7 @@ import { authOptions } from "../auth/[...nextauth]";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
+  const { title, content } = req.body;
 
   if (!id) {
     return res.status(400).json({ error: "id를 찾을 수 없습니다" });
@@ -26,11 +27,27 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (session) {
       if (req.method === "DELETE") {
         await prisma.post.delete({ where: { id: id.toString() } });
-        res.status(200).json({ message: "포스트가 삭제되었습니다" });
+        return res.status(200).json({ message: "포스트가 삭제되었습니다" });
       }
-      // if(req.method === "POST"){
-      //   const alreadyExists = Boolean(await prisma.user.findUnique({where:email}))
-      // }
+      if (req.method === "POST") {
+        const userEmail = session.user?.email;
+        const existingPost = await prisma.post.findUnique({
+          where: { id: id.toString() },
+          include: {
+            user: {
+              select: { email: true },
+            },
+          },
+        });
+
+        if (userEmail === existingPost?.user.email) {
+          await prisma.post.update({
+            where: { id: id.toString() },
+            data: { title, content },
+          });
+          res.status(200).json(id);
+        }
+      }
     } else {
       return res.status(400).json({ error: "유효하나 세션이 없습니다" });
     }

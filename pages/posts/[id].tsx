@@ -45,7 +45,9 @@ function PostDetail() {
     router.back();
   }
 
-  const isPostAuthor = session && data?.user?.name === session?.user?.name;
+  const editPost = () => {
+    router.push(`/posts/edit?id=${router.query.id}`);
+  };
 
   if (!data) {
     return <div>Loading..</div>;
@@ -57,6 +59,7 @@ function PostDetail() {
       {session && data.post?.user.name === session?.user?.name && (
         <div>
           <button onClick={deletePost}>[삭제]</button>
+          <button onClick={editPost}>[수정]</button>
         </div>
       )}
     </Layout>

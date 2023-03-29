@@ -5,9 +5,11 @@ interface InputProps {
   name: string;
   label: string;
   type?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PostInput = ({ name, label, type }: InputProps) => {
+const PostInput = ({ name, label, type, value, onChange }: InputProps) => {
   const {
     register,
     formState: { errors },
@@ -25,6 +27,7 @@ const PostInput = ({ name, label, type }: InputProps) => {
         className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id={name}
         type={type}
+        value={value}
       />
       <span className="label-text-alt text-red-600">
         {errors.root && <p className="text-red-600">{errors?.root?.message}</p>}
