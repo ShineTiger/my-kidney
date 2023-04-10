@@ -1,14 +1,20 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {
+  MouseEventHandler,
+  ReactEventHandler,
+  useEffect,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
 
 interface LayoutProps {
   title?: string;
+  showSideNavbar: () => void;
 }
 
-export default function Header({ title }: LayoutProps) {
+export default function Header({ title, showSideNavbar }: LayoutProps) {
   const { data: session, status } = useSession();
 
   const [mounted, setMounted] = useState(false);
@@ -24,7 +30,6 @@ export default function Header({ title }: LayoutProps) {
       <Link href={"/"}>
         <h1>{title}</h1>
       </Link>
-
       <div className="items-center hidden space-x-8 lg:flex">
         <label
           htmlFor="DarkmodeToggle"
@@ -88,7 +93,10 @@ export default function Header({ title }: LayoutProps) {
           </button>
         )}
       </div>
-      <button className="flex items-center justify-center p-2 lg:hidden">
+      <button
+        onClick={showSideNavbar}
+        className="flex items-center justify-center p-2 lg:hidden"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

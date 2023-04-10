@@ -8,14 +8,10 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <div className="min-h-screen dark:bg-gray-800 dark:text-gray-100">
-      <div className="p-6 space-y-8">
-        <SessionProvider session={session}>
-          <ThemeProvider attribute="class">
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </SessionProvider>
-      </div>
-    </div>
+    <SessionProvider session={session}>
+      <ThemeProvider attribute="class">
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
