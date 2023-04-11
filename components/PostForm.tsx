@@ -34,7 +34,7 @@ const PostForm = ({ loading, data, methods }: PostFormType) => {
       className="w-full max-w-lg my-0 mx-auto"
     >
       <div className="flex flex-wrap -mx-3 mb-6">
-        <PostInput name="title" label="제목" type="text" register={register} />
+        <PostInput name="title" label="제목" type="text" />
       </div>
 
       <div className="flex flex-wrap -mx-3 mb-6">

@@ -9,7 +9,7 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PostInput = ({ name, label, type, value, onChange }: InputProps) => {
+const PostInput = ({ name, label, type, value }: InputProps) => {
   const {
     register,
     formState: { errors },
