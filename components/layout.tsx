@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="p-6  relative min-h-screen  dark:bg-gray-800 dark:text-gray-100 ">
-      <Header title={"홈"} showSideNavbar={showSideNavbar} />
+      <Header title={"Main"} showSideNavbar={showSideNavbar} />
       <Sidebar viewState={view} showSideNavbar={showSideNavbar} />
       <main className="container mx-auto space-y-16 mt-6">
         <div>{children}</div>
