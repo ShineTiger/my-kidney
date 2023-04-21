@@ -26,7 +26,7 @@ export default function Header({ title, showSideNavbar }: LayoutProps) {
   useEffect(() => setMounted(true), []);
 
   return (
-    <header className="container flex items-center justify-between h-16 px-4 mx-auto rounded dark:bg-gray-900">
+    <header className="container flex items-center justify-between h-16 px-4 mx-auto rounded bg-violet-50 dark:bg-gray-900">
       <Link href={"/"}>
         <h1>{title}</h1>
       </Link>
@@ -62,26 +62,23 @@ export default function Header({ title, showSideNavbar }: LayoutProps) {
           </span>
         </label>
         <div className="space-x-4">
-          <Link href={"/mypage"}>mypage</Link>
-          <a rel="noopener noreferrer" href="#">
-            Link
-          </a>
-          <a rel="noopener noreferrer" href="#">
-            Link
-          </a>
+          {session ? (
+            <Link href={"/mypage"}>나의 정보</Link>
+          ) : (
+            <Link href={"/login"}>로그인</Link>
+          )}
         </div>
 
-        {!session && (
-          <button
-            onClick={() => {
-              router.push("/login");
-            }}
-            className="px-4 py-2 rounded-md text-gray-50 bg-violet-600 dark:bg-violet-400 dark:text-gray-900"
-          >
-            Sign in
-          </button>
-        )}
-        {session?.user && (
+        <button
+          onClick={() => {
+            session ? router.push("/posts/upload") : router.push("/login");
+          }}
+          className="px-4 py-2 rounded-md text-gray-50 bg-violet-600 dark:bg-violet-400 dark:text-gray-900"
+        >
+          글쓰기
+        </button>
+
+        {/* {session?.user && (
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -91,7 +88,7 @@ export default function Header({ title, showSideNavbar }: LayoutProps) {
           >
             Sign out
           </button>
-        )}
+        )} */}
       </div>
       <button
         onClick={showSideNavbar}
