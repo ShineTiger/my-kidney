@@ -53,7 +53,10 @@ export default function Sidebar({ viewState, showSideNavbar }: NavbarProps) {
         </ul>
       </nav>
       {viewState ? (
-        <div className=" w-full h-full fixed top-0 left-0 bg-black/20 "></div>
+        <div
+          onClick={showSideNavbar}
+          className=" w-full h-full fixed top-0 left-0 bg-black/20 "
+        ></div>
       ) : (
         ""
       )}
