@@ -54,12 +54,22 @@ function PostDetail() {
   }
   return (
     <Layout>
-      <p>{data.post?.title}</p>
-      <p>{data.post?.content}</p>
+      <h3 className="text-3xl mt-5">{data.post?.title}</h3>
+      <p className="mt-12">{data.post?.content}</p>
       {session && data.post?.user.name === session?.user?.name && (
-        <div>
-          <button onClick={deletePost}>[삭제]</button>
-          <button onClick={editPost}>[수정]</button>
+        <div className="mt-6">
+          <button
+            className="py-2 px-3 mr-3 rounded-md bg-violet-600 text-gray-50"
+            onClick={editPost}
+          >
+            수정
+          </button>
+          <button
+            className="py-2 px-3 rounded-md border-2 border-solid"
+            onClick={deletePost}
+          >
+            삭제
+          </button>
         </div>
       )}
     </Layout>
