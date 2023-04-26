@@ -1,23 +1,7 @@
 import Layout from "@/components/layout";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
-import { useState } from "react";
 
 export default function login() {
-  const [validation, setValidation] = useState(false);
-  const [email, setEmail] = useState("");
-  const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const isAvaliable = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "email") {
-      emailRegex.test(email) ? setValidation(true) : setValidation(false);
-    }
-  };
-
   const handleGoogleLogin = async () => {
     await signIn("google", { callbackUrl: "/" });
   };
@@ -28,9 +12,7 @@ export default function login() {
         <h2 className="mb-3 text-3xl font-semibold text-center">
           로그인 및 회원가입
         </h2>
-        <p className="text-sm text-center text-gray-600 underline	">
-          {/* <Link href="/signup">계정이 없다면 회원가입을 진행해 주세요 </Link> */}
-        </p>
+        <p className="text-sm text-center text-gray-600 underline	"></p>
         <div className="my-6 space-y-4">
           <button
             onClick={handleGoogleLogin}
