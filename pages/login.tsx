@@ -1,4 +1,4 @@
-import Layout from "@/components/layout";
+import Layout from "@/components/Layout";
 import { signIn } from "next-auth/react";
 
 export default function login() {
