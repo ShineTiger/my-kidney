@@ -25,9 +25,11 @@ export default function login() {
   return (
     <Layout>
       <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 bg-gray-50 text-gray-800 my-0 mx-auto">
-        <h2 className="mb-3 text-3xl font-semibold text-center">로그인</h2>
+        <h2 className="mb-3 text-3xl font-semibold text-center">
+          로그인 및 회원가입
+        </h2>
         <p className="text-sm text-center text-gray-600 underline	">
-          <Link href="/signup">계정이 없다면 회원가입을 진행해 주세요 </Link>
+          {/* <Link href="/signup">계정이 없다면 회원가입을 진행해 주세요 </Link> */}
         </p>
         <div className="my-6 space-y-4">
           <button
@@ -46,43 +48,6 @@ export default function login() {
             <p>Login with Google</p>
           </button>
         </div>
-        <div className="flex items-center w-full my-4">
-          <hr className="w-full text-gray-600" />
-          <p className="px-3 text-gray-600">OR</p>
-          <hr className="w-full text-gray-600" />
-        </div>
-        <form className="space-y-8 ng-untouched ng-pristine ng-valid">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm">
-                Email address
-              </label>
-              <input
-                onChange={handleInput}
-                onBlur={isAvaliable}
-                type="email"
-                name="email"
-                id="email"
-                placeholder="이메일을 입력해 주세요"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600"
-              />
-              <label
-                className={validation ? "hidden" : "block text-sm text-red-600	"}
-              >
-                이메일 양식에 맞게 작성해 주세요
-              </label>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className={`${
-              validation ? "bg-violet-600" : " bg-slate-400"
-            } w-full px-8 py-3 font-semibold rounded-md  text-gray-50`}
-            disabled={validation ? false : true}
-          >
-            이메일로 계속하기
-          </button>
-        </form>
       </div>
     </Layout>
   );

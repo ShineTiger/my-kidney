@@ -22,16 +22,14 @@ export default function mypage() {
               <h4 className="text-lg font-semibold text-center md:text-left">
                 Name
               </h4>
-              <p className="dark:text-gray-400">
-                <span></span>
-                {JSON.stringify(session.user?.name)}
+              <p className="dark:text-gray-400 text-center md:text-left">
+                <span>{JSON.stringify(session.user?.name)}</span>
               </p>
-              <h4 className="text-lg font-semibold text-center md:text-left">
+              <h4 className="mt-6 text-lg font-semibold text-center md:text-left">
                 Email
               </h4>
-              <p className="dark:text-gray-400">
-                <span></span>
-                {JSON.stringify(session.user?.email)}
+              <p className="dark:text-gray-400 text-center md:text-left">
+                <span>{JSON.stringify(session.user?.email)}</span>
               </p>
             </div>
           </div>
