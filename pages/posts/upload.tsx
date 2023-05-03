@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import PostInput from "@/components/PostInput";
 import PostTextarea from "@/components/PostTextarea";
 import useMutation from "@/libs/client/useMutation";

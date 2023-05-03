@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import useMutation from "@/libs/client/useMutation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
