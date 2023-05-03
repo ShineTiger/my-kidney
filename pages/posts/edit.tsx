@@ -1,4 +1,4 @@
-import Layout from "@/components/layout";
+import Layout from "@/components/Layout";
 import PostInput from "@/components/PostInput";
 import PostTextarea from "@/components/PostTextarea";
 import { Post } from "@prisma/client";

@@ -21,8 +21,6 @@ interface PostFormType {
 
 const PostForm = ({ loading, data, methods }: PostFormType) => {
   const {
-    handleSubmit,
-    register,
     formState: { errors },
   } = useForm<PostType>({ mode: "onChange" });
 
@@ -42,13 +40,6 @@ const PostForm = ({ loading, data, methods }: PostFormType) => {
           <label className="block uppercase tracking-wide text-gray-700 dark:text-gray-200 text-m font-bold mb-2">
             내용
           </label>
-          {/* <textarea
-            {...register("content", {
-              required: "내용을 입력해주세요",
-            })}
-            className=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
-            id="content"
-          ></textarea> */}
           <span className="label-text-alt text-red-600">
             {errors.content ? errors.content.message : ""}
           </span>

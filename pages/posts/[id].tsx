@@ -1,4 +1,4 @@
-import Layout from "@/components/layout";
+import Layout from "@/components/Layout";
 import { Post } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -31,7 +31,7 @@ function PostDetail() {
 
   //todo : 삭제되었으면 null대신 리다이렉트
   const { data } = useSWR<GetPostType>(
-    router.query.id ? `/api/posts/${router.query.id}` : null,
+    router.query.id ? `/api/posts/${router.query.id}` : "",
     fetcher
   );
 

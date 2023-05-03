@@ -77,18 +77,6 @@ export default function Header({ title, showSideNavbar }: LayoutProps) {
         >
           글쓰기
         </button>
-
-        {/* {session?.user && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              signOut();
-            }}
-            className="px-4 py-2 rounded-md text-gray-50 bg-violet-600 dark:bg-violet-400 dark:text-gray-900"
-          >
-            Sign out
-          </button>
-        )} */}
       </div>
       <button
         onClick={showSideNavbar}

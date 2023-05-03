@@ -1,9 +1,10 @@
-import Layout from "@/components/layout";
+import Layout from "@/components/Layout";
 import { GetServerSidePropsContext } from "next";
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { authOptions } from "./api/auth/[...nextauth]";
+import { signOut } from "next-auth/react";
 
 export default function mypage() {
   const { data: session } = useSession();
@@ -31,6 +32,12 @@ export default function mypage() {
               <p className="dark:text-gray-400 text-center md:text-left">
                 <span>{JSON.stringify(session.user?.email)}</span>
               </p>
+              <button
+                onClick={() => signOut()}
+                className="mt-4 rounded-md py-2 border border-violet-600 text-violet-600  "
+              >
+                로그아웃
+              </button>
             </div>
           </div>
         </div>

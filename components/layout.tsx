@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import Header from "./header";
+import Header from "./Header";
 import Link from "next/link";
 import Sidebar from "./Sidebar";
 
