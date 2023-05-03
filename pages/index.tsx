@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import PostCards from "@/components/PostCards";
 import { Post } from "@prisma/client";
 import React from "react";

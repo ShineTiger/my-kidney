@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import { Post } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
